@@ -42,7 +42,7 @@ const thai = Noto_Serif_Thai({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yuehua-diary.vercel.app"),
+  metadataBase: new URL("https://yuehua-dairy.vercel.app"),
   title: {
     default: "Yuehua · Moonlit Blossom — บันทึกการวิจัยการลงทุน",
     template: "%s · Moonlit Blossom",
