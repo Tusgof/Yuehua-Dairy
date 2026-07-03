@@ -1,0 +1,232 @@
+/* ==================================================================
+   Yuehua / Moonlit Blossom — Diary site global styles
+   Design tokens ported from the Yuehua design system. Premium
+   monochrome (warm paper + warm ink), moonlight silver, and a single
+   reserved per-project accent (Higanbana crimson / Lily celadon).
+   Fonts are injected by next/font in app/layout.tsx as the CSS vars
+   --font-display / --font-serif / --font-mono / --font-thai.
+   ================================================================== */
+
+:root {
+  /* ---- Ink scale: warm near-black → silver */
+  --ink-900: #16130E;
+  --ink-800: #241F17;
+  --ink-700: #3A332A;
+  --ink-600: #544B3E;
+  --ink-500: #6E6555;
+  --ink-400: #938A78;
+  --ink-300: #B6AD9B;
+  --ink-200: #D7CFBE;
+  --ink-150: #E3DCCE;
+  --ink-100: #ECE6D9;
+  --ink-50:  #F3EEE3;
+
+  /* ---- Paper & surfaces (warm) */
+  --paper:        #F6F2E8;
+  --paper-sunk:   #EFE9DC;
+  --card:         #FFFEFA;
+  --card-raised:  #FFFFFF;
+
+  /* ---- Night sky (inverted register) */
+  --night:        #14110C;
+  --night-2:      #1F1A12;
+  --night-line:   #3A3225;
+  --paper-on-night:#F4EFE4;
+
+  /* ---- Moonlight accent (cool silver) */
+  --moon:      #C7CBD0;
+  --moon-soft: #DEE1E4;
+  --moon-deep: #8A929B;
+
+  /* ---- Semantic aliases */
+  --text-display:  var(--ink-900);
+  --text-strong:   var(--ink-800);
+  --text-heading:  var(--ink-700);
+  --text-body:     var(--ink-600);
+  --text-muted:    var(--ink-500);
+  --text-faint:    var(--ink-400);
+  --text-disabled: var(--ink-300);
+  --text-inverse:  var(--paper-on-night);
+
+  --surface-page:   var(--paper);
+  --surface-sunk:   var(--paper-sunk);
+  --surface-card:   var(--card);
+  --surface-raised: var(--card-raised);
+
+  --line-hairline: var(--ink-200);
+  --line-soft:     var(--ink-150);
+  --line-strong:   var(--ink-700);
+
+  /* ---- Directional signals: monochrome by intent (▲▼ + ink tone) */
+  --signal-up:   #2B3A33;
+  --signal-down: #3A2A22;
+  --signal-flat: var(--ink-400);
+
+  --focus-ring: color-mix(in oklch, var(--ink-900) 55%, transparent);
+
+  /* ---- Type scale */
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  --lh-tight: 1.04; --lh-snug: 1.18; --lh-body: 1.62;
+  --ls-label: 0.18em; --ls-heading: -0.005em; --ls-display: -0.015em;
+
+  /* ---- Spacing (4px grid) */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px; --sp-24:96px;
+
+  --measure: 66ch;
+  --container: 1120px;
+
+  /* ---- Radii, borders, shadows */
+  --r-xs:2px; --r-sm:4px; --r-md:6px; --r-lg:10px; --r-pill:999px;
+  --shadow-sm: 0 1px 3px rgba(22,19,14,0.06), 0 1px 2px rgba(22,19,14,0.04);
+  --shadow-md: 0 4px 14px rgba(22,19,14,0.07), 0 2px 5px rgba(22,19,14,0.05);
+  --shadow-lg: 0 14px 40px rgba(22,19,14,0.10), 0 4px 12px rgba(22,19,14,0.06);
+  --glow-moon: 0 0 24px rgba(199,203,208,0.18);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --rule-fade: linear-gradient(90deg, transparent, var(--ink-200) 12%, var(--ink-200) 88%, transparent);
+
+  /* ---- Per-project accent (default = neutral ink; overridden below) */
+  --project-accent: var(--ink-700);
+  --project-accent-ink: var(--ink-800);
+  --project-accent-on-night: var(--moon);
+}
+
+/* ---- Per-project reserved colour (~5% of the surface) --------------- */
+[data-project="higanbana"] {
+  --project-accent: #9E2B2A;      /* 朱 cinnabar / wax-seal crimson */
+  --project-accent-ink: #8A2420;
+  --project-accent-on-night: #C6534C;
+}
+[data-project="lily"] {
+  --project-accent: #5E7D68;      /* pale celadon — a moonlit garden */
+  --project-accent-ink: #4C6A56;
+  --project-accent-on-night: #8FB39C;
+}
+
+* , *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 17px;
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:lang(th), .th { font-family: var(--font-thai), var(--font-serif), serif; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--text-display);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+  font-weight: var(--fw-semibold);
+  margin: 0 0 0.4em;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+/* ---- Shared utility classes -------------------------------------- */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.mono { font-family: var(--font-mono), monospace; font-variant-numeric: tabular-nums; }
+
+.rule-node {
+  display: flex; align-items: center; gap: 14px; color: var(--ink-300);
+  margin: 40px 0;
+}
+.rule-node::before, .rule-node::after {
+  content: ""; flex: 1; height: 1px; background: var(--rule-fade);
+}
+.rule-node > span {
+  font-family: var(--font-mono), monospace; font-size: 11px;
+  letter-spacing: 0.3em; color: var(--project-accent); white-space: nowrap;
+}
+
+/* ==================================================================
+   Prose — the body of a research note (rendered from Markdown)
+   ================================================================== */
+.prose { max-width: var(--measure); font-size: 17px; line-height: var(--lh-body); color: var(--text-body); }
+.prose > *:first-child { margin-top: 0; }
+.prose p { margin: 0 0 1.1em; }
+.prose h2 {
+  font-family: var(--font-display), serif; font-size: 28px; font-weight: 600;
+  color: var(--text-display); margin: 1.8em 0 0.5em; letter-spacing: var(--ls-heading);
+}
+.prose h3 {
+  font-family: var(--font-display), serif; font-size: 22px; font-weight: 600;
+  color: var(--text-strong); margin: 1.5em 0 0.4em;
+}
+.prose h2::before {
+  content: "✦"; color: var(--project-accent); font-size: 0.6em;
+  vertical-align: 0.25em; margin-right: 0.5em; font-family: var(--font-mono), monospace;
+}
+.prose strong { font-weight: 600; color: var(--text-strong); }
+.prose em { font-style: italic; }
+.prose a {
+  color: var(--text-strong); text-decoration: underline;
+  text-decoration-color: var(--project-accent); text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose ul, .prose ol { margin: 0 0 1.1em; padding-left: 1.4em; }
+.prose li { margin: 0.3em 0; }
+.prose li::marker { color: var(--project-accent); }
+.prose blockquote {
+  margin: 1.6em 0; padding-left: 20px; border-left: 1px solid var(--project-accent);
+  font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
+  font-size: 23px; line-height: 1.34; color: var(--text-strong);
+}
+.prose blockquote p { margin: 0; }
+.prose hr {
+  border: 0; height: 1px; background: var(--rule-fade); margin: 2.2em 0;
+}
+.prose code {
+  font-family: var(--font-mono), monospace; font-size: 0.86em;
+  background: var(--paper-sunk); border: 1px solid var(--line-hairline);
+  border-radius: var(--r-xs); padding: 0.1em 0.35em; color: var(--ink-800);
+}
+.prose pre {
+  background: var(--night); color: var(--paper-on-night);
+  border-radius: var(--r-md); padding: 20px 22px; overflow-x: auto;
+  font-size: 13.5px; line-height: 1.6; margin: 1.4em 0;
+}
+.prose pre code {
+  background: none; border: 0; padding: 0; color: inherit; font-size: inherit;
+}
+.prose img { border-radius: var(--r-md); border: 1px solid var(--line-hairline); margin: 1.5em 0; }
+
+/* ---- GFM tables (win rate / PnL / levels) ------------------------ */
+.prose table {
+  width: 100%; border-collapse: collapse; margin: 1.6em 0;
+  font-family: var(--font-mono), monospace; font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.prose th {
+  text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-faint);
+  padding: 10px 14px; border-bottom: 1px solid var(--line-strong);
+}
+.prose td {
+  padding: 12px 14px; border-bottom: 1px solid var(--line-soft); color: var(--text-strong);
+}
+.prose tr:last-child td { border-bottom: 0; }
+.prose td:not(:first-child), .prose th:not(:first-child) { text-align: right; }
