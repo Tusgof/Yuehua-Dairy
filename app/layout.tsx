@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   description:
     "บันทึกการวิจัยการลงทุนเชิงปริมาณ — a quantitative investment research diary, written slowly and in public. บุปผาแสงจันทร์.",
-  icons: { icon: "/logo-mark.png" },
+  icons: { icon: "/logo-mark.svg" },
   openGraph: {
     title: "Yuehua · Moonlit Blossom",
     description: "บันทึกการวิจัยการลงทุนเชิงปริมาณ — a research diary, written in public.",

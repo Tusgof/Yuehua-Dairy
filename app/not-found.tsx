@@ -16,7 +16,7 @@ export default function NotFound() {
       }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo-mark-white.png" alt="" width={80} height={80} style={{ opacity: 0.85 }} />
+      <img src="/logo-mark-white.svg" alt="" width={80} height={80} style={{ opacity: 0.85 }} />
       <div
         className="mono"
         style={{

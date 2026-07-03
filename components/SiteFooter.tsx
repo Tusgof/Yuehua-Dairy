@@ -16,7 +16,7 @@ export default function SiteFooter({ lang }: { lang: Lang }) {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/logo-mark-white.png"
+          src="/logo-mark-white.svg"
           alt="Moonlit Blossom"
           width={64}
           height={64}
