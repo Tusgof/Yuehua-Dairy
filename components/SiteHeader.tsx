@@ -27,7 +27,7 @@ export default function SiteHeader({ lang }: { lang: Lang }) {
       >
         <Link href={`/${lang}`} style={{ display: "flex", alignItems: "center", gap: 12 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-mark.svg" alt="" width={30} height={30} style={{ objectFit: "contain" }} />
+          <img src="/logo-mark.png" alt="" width={30} height={30} style={{ objectFit: "contain" }} />
           <span
             style={{
               fontFamily: "var(--font-display), serif",

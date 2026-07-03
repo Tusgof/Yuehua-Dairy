@@ -61,7 +61,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="container" style={{ padding: "80px 32px 72px", position: "relative" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo-mark-white.svg"
+            src="/logo-mark-white.png"
             alt=""
             width={72}
             height={72}
