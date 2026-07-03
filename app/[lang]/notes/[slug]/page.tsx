@@ -14,13 +14,14 @@ export function generateStaticParams({ params }: { params: { lang: string } }) {
   return getNoteSlugs(params.lang).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { lang: string; slug: string };
-}): Metadata {
-  const lang = params.lang as Lang;
-  const note = getNote(lang, params.slug);
+  params: Promise<{ lang: string; slug: string }>;
+}): Promise<Metadata> {
+  const { lang: rawLang, slug } = await params;
+  const lang = rawLang as Lang;
+  const note = getNote(lang, slug);
   if (!note) return {};
   const project = getProject(note.project);
   return {
@@ -29,14 +30,15 @@ export function generateMetadata({
   };
 }
 
-export default function NotePage({
+export default async function NotePage({
   params,
 }: {
-  params: { lang: string; slug: string };
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  if (!isLang(params.lang)) notFound();
-  const lang = params.lang as Lang;
-  const note = getNote(lang, params.slug);
+  const { lang: rawLang, slug } = await params;
+  if (!isLang(rawLang)) notFound();
+  const lang = rawLang as Lang;
+  const note = getNote(lang, slug);
   if (!note) notFound();
 
   const project = getProject(note.project);

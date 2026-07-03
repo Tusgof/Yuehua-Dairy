@@ -7,17 +7,23 @@ import { UI } from "@/lib/i18n";
 import { allProjects } from "@/lib/projects";
 import NoteCard from "@/components/NoteCard";
 
-export function generateMetadata({ params }: { params: { lang: string } }): Metadata {
-  const lang = params.lang as Lang;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang: rawLang } = await params;
+  const lang = rawLang as Lang;
   return {
     title: lang === "th" ? "บันทึกการวิจัยการลงทุน" : "An investment research diary",
     description: UI.tagline[lang === "en" ? "en" : "th"],
   };
 }
 
-export default function Home({ params }: { params: { lang: string } }) {
-  if (!isLang(params.lang)) notFound();
-  const lang = params.lang as Lang;
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: rawLang } = await params;
+  if (!isLang(rawLang)) notFound();
+  const lang = rawLang as Lang;
   const notes = getAllNotes(lang);
   const projects = allProjects();
 

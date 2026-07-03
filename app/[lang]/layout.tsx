@@ -8,15 +8,16 @@ export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
 }
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  if (!isLang(params.lang)) notFound();
-  const lang = params.lang as Lang;
+  const { lang: rawLang } = await params;
+  if (!isLang(rawLang)) notFound();
+  const lang = rawLang as Lang;
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
